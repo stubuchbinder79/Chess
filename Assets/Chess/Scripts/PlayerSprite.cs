@@ -12,8 +12,7 @@ public class PlayerSprite : MonoBehaviour
 
     [SerializeField, Tooltip("what color should the background be when it's the player's turn''")] 
     private Color enabledColor = Color.green;
-  
-    
+
     private Player _player;
     public Player player
     {
@@ -28,8 +27,7 @@ public class PlayerSprite : MonoBehaviour
     {
         disabledColor = GetComponent<Image>().color;
     }
-
-
+    
     private void OnEnable()
     {
         GameManager.OnNextPlayer += GameManagerOnOnNextPlayer;
