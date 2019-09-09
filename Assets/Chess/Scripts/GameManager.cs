@@ -11,6 +11,11 @@ public class GameManager : Singleton<GameManager>
     public Player white;
     public Player black;
 
+    [SerializeField, Tooltip("sprite used to display player 1 name")]
+    private PlayerSprite player1;
+    [SerializeField, Tooltip("sprite used to display player 2 name")]
+    private PlayerSprite player2;
+
     public Player currentPlayer { get; internal set; }
     public Player otherPlayer { get; internal set; }
 
@@ -36,8 +41,11 @@ public class GameManager : Singleton<GameManager>
     
     private void StartNewGame()
     {
-	    white = new Player("white", true);
-	    black = new Player("black", false);
+	    white = new Player("Stu", true);
+	    black = new Player("Tom", false);
+
+	    player1.player = white;
+	    player2.player = black;
 
 	    currentPlayer = white;
 	    otherPlayer = black;
