@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+
+	public static event Action<Player> OnNextPlayer = delegate { };
+	
     [SerializeField, Tooltip("the game board containing the cells")]
     private Board board;
    
@@ -35,6 +39,7 @@ public class GameManager : Singleton<GameManager>
 	    Player tempPlayer = currentPlayer;
 	    currentPlayer = otherPlayer;
 	    otherPlayer = tempPlayer;
+	    OnNextPlayer(currentPlayer);
     }
     
     #region Game Initialization
@@ -51,6 +56,8 @@ public class GameManager : Singleton<GameManager>
 	    otherPlayer = black;
 
 	    SetPieces();
+
+	    OnNextPlayer(currentPlayer);
     }
 
 
