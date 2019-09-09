@@ -1,10 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField, Tooltip("the game board containing the cells")]
     private Board board;
+   
+    public GamePieceSettings gamePieces;
 
     public Player white;
     public Player black;
@@ -12,27 +13,8 @@ public class GameManager : Singleton<GameManager>
     public Player currentPlayer { get; internal set; }
     public Player otherPlayer { get; internal set; }
 
-    internal GameObject[,] pieces = new GameObject[8, 8];
-
-    // game piece prefabs
-    [SerializeField] private GameObject WhitePawn;
-    [SerializeField] private GameObject BlackPawn;
-
-    [SerializeField] private GameObject WhiteRook;
-    [SerializeField] private GameObject BlackRook;
-
-    [SerializeField] private GameObject WhiteKnight;
-    [SerializeField] private GameObject BlackKnight;
-
-    [SerializeField] private GameObject WhiteBishop;
-    [SerializeField] private GameObject BlackBishop;
-
-    [SerializeField] private GameObject WhiteQueen;
-    [SerializeField] private GameObject BlackQueen;
-
-    [SerializeField] private GameObject WhiteKing;
-    [SerializeField] private GameObject BlackKing;
-
+    private GameObject[,] pieces = new GameObject[8, 8];
+    
     private void Start()
     {
         white = new Player("white", true);
@@ -46,32 +28,32 @@ public class GameManager : Singleton<GameManager>
 
     private void SetPieces()
     {
-        AddPiece(WhiteRook, white, 0, 0);
-        AddPiece(WhiteKnight, white, 1, 0);
-        AddPiece(WhiteBishop, white, 2, 0);
-        AddPiece(WhiteQueen, white, 3, 0);
-        AddPiece(WhiteKing, white, 4, 0);
-        AddPiece(WhiteBishop, white, 5, 0);
-        AddPiece(WhiteKnight, white, 6, 0);
-        AddPiece(WhiteBishop, white, 7, 0);
+        AddPiece(gamePieces.whiteRook, white, 0, 0);
+        AddPiece(gamePieces.whiteKnight, white, 1, 0);
+        AddPiece(gamePieces.whiteBishop, white, 2, 0);
+        AddPiece(gamePieces.whiteQueen, white, 3, 0);
+        AddPiece(gamePieces.whiteKing, white, 4, 0);
+        AddPiece(gamePieces.whiteBishop, white, 5, 0);
+        AddPiece(gamePieces.whiteKnight, white, 6, 0);
+        AddPiece(gamePieces.whiteRook, white, 7, 0);
 
         for (int i = 0; i < 8; i++)
         {
-            AddPiece(WhitePawn, white, i, 1);
+            AddPiece(gamePieces.whitePawn, white, i, 1);
         }
 
-        AddPiece(BlackRook, black, 0, 7);
-        AddPiece(BlackKnight, black, 1, 7);
-        AddPiece(BlackBishop, black, 2, 7);
-        AddPiece(BlackQueen, black, 3, 7);
-        AddPiece(BlackKing, black, 4, 7);
-        AddPiece(BlackBishop, black, 5, 7);
-        AddPiece(BlackKnight, black, 6, 7);
-        AddPiece(BlackRook, black, 7, 7);
+        AddPiece(gamePieces.blackRook, black, 0, 7);
+        AddPiece(gamePieces.blackKnight, black, 1, 7);
+        AddPiece(gamePieces.blackBishop, black, 2, 7);
+        AddPiece(gamePieces.blackQueen, black, 3, 7);
+        AddPiece(gamePieces.blackKing, black, 4, 7);
+        AddPiece(gamePieces.blackBishop, black, 5, 7);
+        AddPiece(gamePieces.blackKnight, black, 6, 7);
+        AddPiece(gamePieces.blackRook, black, 7, 7);
 
         for (int i = 0; i < 8; i++)
         {
-            AddPiece(BlackPawn, black, i, 6);
+            AddPiece(gamePieces.blackPawn, black, i, 6);
         }
 
 

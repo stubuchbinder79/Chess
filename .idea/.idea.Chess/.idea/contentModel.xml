@@ -11,12 +11,11 @@
             <e p="Bishop.cs" t="Include" />
             <e p="Board.cs" t="Include" />
             <e p="Cell.cs" t="Include" />
-            <e p="CellSelector.cs" t="Include" />
             <e p="ExtensionMethods.cs" t="Include" />
             <e p="GameManager.cs" t="Include" />
+            <e p="GamePieceSettings.cs" t="Include" />
             <e p="King.cs" t="Include" />
             <e p="Knight.cs" t="Include" />
-            <e p="MoveSelector.cs" t="Include" />
             <e p="Pawn.cs" t="Include" />
             <e p="Piece.cs" t="Include" />
             <e p="Player.cs" t="Include" />
