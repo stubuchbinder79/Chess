@@ -6,9 +6,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(GraphicRaycaster))]
+[RequireComponent(typeof(MoveSelector))]
 public class CellSelector : MonoBehaviour, ISelector
 {
     private GameManager gameManager;
+    private MoveSelector moveSelector;
 
     private GraphicRaycaster graphicRaycaster;
     private PointerEventData pointerEventData;
@@ -24,6 +26,7 @@ public class CellSelector : MonoBehaviour, ISelector
         eventSystem = (eventSystem) ?? FindObjectOfType<EventSystem>();
         Assert.IsNotNull(eventSystem, "EventSystem not found.");
 
+        moveSelector = (moveSelector) ?? GetComponent<MoveSelector>();
         graphicRaycaster = GetComponent<GraphicRaycaster>();
     }
 
@@ -35,6 +38,7 @@ public class CellSelector : MonoBehaviour, ISelector
     public void ExitState(GameObject go)
     {
         enabled = false;
+        moveSelector.EnterState(go);
     }
 
     private void Update()
@@ -54,7 +58,7 @@ public class CellSelector : MonoBehaviour, ISelector
                 GameObject movingPiece = gameManager.PieceAtGridPoint(selectedCell.boardPosition);
                 gameManager.SelectPiece(movingPiece);
                 
-//                ExitState(movingPiece);
+                ExitState(movingPiece);
             }
         }
 

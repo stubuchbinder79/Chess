@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class Board : MonoBehaviour
@@ -95,12 +96,38 @@ public class Board : MonoBehaviour
 
 	public void SelectPiece(GameObject selectedPiece)
 	{
+		DeselectPiece(null);
+		Vector2Int gridPoint = GameManager.Instance.GridForPiece(selectedPiece);
+		allCells[gridPoint.x, gridPoint.y].highlighted = true;
+	}
+
+	public void AttackPieceAtGridPoint(Vector2Int gridPoint)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public void HighlightPieceAtGridPoint(Vector2Int gridPoint)
+	{
+		allCells[gridPoint.x, gridPoint.y].highlighted = true;
+	}
+
+	// removes the highlights from all cells
+	public void DeselectPiece([CanBeNull] GameObject movingPiece)
+	{
 		foreach (Cell cell in allCells)
 		{
 			cell.highlighted = false;
 		}
+	}
 
-		Vector2Int gridPoint = GameManager.Instance.GridForPiece(selectedPiece);
-		allCells[gridPoint.x, gridPoint.y].highlighted = true;
+	public void MovePiece(GameObject movingPiece, Vector2Int gridPoint)
+	{
+		 int col = (!flip) ? gridPoint.x : 7 - gridPoint.x;
+		 int row = (!flip) ? gridPoint.y : 7 - gridPoint.y;
+        
+		 Vector2Int point = new Vector2Int(col, row);
+		 Vector3 gridPos = point.Vector3FromVector2Int();
+     
+		 movingPiece.GetComponent<RectTransform>().anchoredPosition = new Vector2(col * cellSize, row *cellSize);
 	}
 }

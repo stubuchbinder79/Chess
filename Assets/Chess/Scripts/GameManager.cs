@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -15,12 +16,22 @@ public class GameManager : Singleton<GameManager>
 
     private GameObject[,] pieces = new GameObject[8, 8];
     
+    public List<Vector2Int> currentMoves = new List<Vector2Int>();
+    
     private void Start()
     {
 	    StartNewGame();
      
     }
 
+    // switches current player to the other player
+    public void NextPlayer()
+    {
+	    Player tempPlayer = currentPlayer;
+	    currentPlayer = otherPlayer;
+	    otherPlayer = tempPlayer;
+    }
+    
     #region Game Initialization
     
     private void StartNewGame()
@@ -109,12 +120,6 @@ public class GameManager : Singleton<GameManager>
         return (DoesPieceBelongToCurrentPlayer(piece) && currentPlayer.castleIsActive);
     }
  
-    // pass through method to trigger board cell selection
-    public void SelectPiece(GameObject selectedPiece)
-    {
-	    board.SelectPiece(selectedPiece);
-    }
-
 
     
     public GameObject PieceAtGridPoint(Vector2Int gridPoint)
@@ -139,4 +144,115 @@ public class GameManager : Singleton<GameManager>
 
 	    return true;
     }
+
+    public List<Vector2Int> MovesForPiece(GameObject movingPiece)
+    {
+	    Piece piece = movingPiece.GetComponent<Piece>();
+	    Vector2Int gridPoint = GridForPiece(movingPiece);
+        
+	    currentMoves = piece.MoveLocations(gridPoint);
+        
+	    // filter out offboard locations
+	    currentMoves.RemoveAll(tile => tile.x < 0 || tile.x > 7 || tile.y < 0 || tile.y > 7);
+        
+	    // filter friendly pieces
+	    currentMoves.RemoveAll(loc => FriendlyPieceAtGridPoint(loc));
+        
+	    if (piece.type == PieceType.Pawn)
+	    {
+		    // filter out forward gridPoints that have a piece occupying them
+		    // this is to prevent moving 2 spaces if the other player has a piece 
+		    // in front of the pawn
+        
+		    Vector2Int gridPoint1 = new Vector2Int(gridPoint.x, gridPoint.y + currentPlayer.forward);
+		    Vector2Int gridPoint2 = new Vector2Int(gridPoint.x, gridPoint.y + currentPlayer.forward * 2);
+        
+		    if (PieceAtGridPoint(gridPoint1))
+		    {
+			    currentMoves.Remove(gridPoint1);
+		    }
+        
+		    if (PieceAtGridPoint(gridPoint2))
+		    {
+			    currentMoves.Remove(gridPoint2);
+		    }
+	    }
+        
+	    return currentMoves;
+    }
+
+    public void Move(GameObject movingPiece, Vector2Int gridPoint)
+    {
+	    Vector2Int startGridPoint = GridForPiece(movingPiece);
+	    pieces[startGridPoint.x, startGridPoint.y] = null;
+	    pieces[gridPoint.x, gridPoint.y] = movingPiece;
+	    
+	    board.MovePiece(movingPiece, gridPoint);
+
+	    movingPiece.GetComponent<Piece>().HasMoved = true;
+
+	    if (movingPiece.GetComponent<King>() != null)
+	    {
+		    Piece thePiece = movingPiece.GetComponent<Piece>();
+		    // check if castle
+		    Debug.Log("check castle");
+		    if (gridPoint.x == thePiece.originalLocation.x + 2)
+		    {
+			    Debug.Log("castled right");
+
+			    GameObject rook = PieceAtGridPoint(new Vector2Int(gridPoint.x + 1, gridPoint.y));
+			    Move(rook, new Vector2Int(gridPoint.x - 1, gridPoint.y));
+		    }
+		    else if (gridPoint.x == thePiece.originalLocation.x - 2)
+		    {
+			    GameObject rook = PieceAtGridPoint(new Vector2Int(gridPoint.x - 2, gridPoint.y));
+			    Move(rook, new Vector2Int(gridPoint.x + 1, gridPoint.y));
+			    Debug.Log("castled left");
+		    }
+	    }
+    }
+    
+    #region Board Pass Through Methods
+
+    public void SelectPiece(GameObject selectedPiece)
+    {
+	    board.SelectPiece(selectedPiece);
+    }
+
+    
+    public void AttackPieceAtGridPoint(Vector2Int loc)
+    {
+	    board.AttackPieceAtGridPoint(loc);
+    }
+
+    public void HighlightPieceAtGridPoint(Vector2Int loc)
+    {
+	    board.HighlightPieceAtGridPoint(loc);
+    }
+
+    public void DeselectPiece(GameObject movingPiece)
+    {
+	    board.DeselectPiece(movingPiece);
+    }
+
+
+    #endregion
+
+
+    public void CapturePiece(Vector2Int gridPoint, Player gameManagerCurrentPlayer)
+    {
+	    GameObject pieceToCapture = PieceAtGridPoint(gridPoint);
+	    string pieceType = pieceToCapture.GetComponent<Piece>().type.ToString();
+	    
+	    currentPlayer.capturedPieces.Add(pieceType);
+	    pieces[gridPoint.x, gridPoint.y] = null;
+        
+	    if (pieceToCapture.GetComponent<Piece>().type == PieceType.King)
+	    {
+		    Debug.Log(currentPlayer.name + " wins!");
+	    }
+	    Destroy(pieceToCapture);
+    }
+
+
 }
