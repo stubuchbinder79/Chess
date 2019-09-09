@@ -1,6 +1,8 @@
 # Chess
 A chess game prototype created with Unity
 
+<b>Unity 2019.2.2</b>
+
 #  Notes
 <ul>
 <li>The current game is not 100% complete, as such it should be tested in the editor.</li>
