@@ -103,7 +103,7 @@ public class Board : MonoBehaviour
 
 	public void AttackPieceAtGridPoint(Vector2Int gridPoint)
 	{
-		throw new System.NotImplementedException();
+		allCells[gridPoint.x, gridPoint.y].attacking = true;
 	}
 
 	public void HighlightPieceAtGridPoint(Vector2Int gridPoint)
@@ -116,6 +116,7 @@ public class Board : MonoBehaviour
 	{
 		foreach (Cell cell in allCells)
 		{
+			cell.attacking = false;
 			cell.highlighted = false;
 		}
 	}
