@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class Player 
 {
-    public List<GameObject> pieces;
+    public readonly List<GameObject> pieces;
     public List<string> capturedPieces;
 
-    public int forward;
-    public bool castleIsActive;
+    public readonly int forward;
+    public readonly bool castleIsActive;
 
-    public string name;
+    public readonly string name;
 
     public Player(string name, bool positiveZMovement)
     {

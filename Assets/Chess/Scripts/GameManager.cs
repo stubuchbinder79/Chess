@@ -41,8 +41,8 @@ public class GameManager : Singleton<GameManager>
     
     private void StartNewGame()
     {
-	    white = new Player("Stu", true);
-	    black = new Player("Tom", false);
+	    white = new Player("Stu Buchbinder", true);
+	    black = new Player("Tom Kent", false);
 
 	    player1.player = white;
 	    player2.player = black;

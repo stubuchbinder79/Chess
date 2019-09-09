@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 990341570854254124}
   - component: {fileID: 6939149177076166578}
   - component: {fileID: 1296787832474571699}
-  - component: {fileID: 1233613656264263204}
+  - component: {fileID: 2527420590656503694}
   m_Layer: 5
-  m_Name: wPawn 1
+  m_Name: wQueen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1233613656264263204
+--- !u!114 &2527420590656503694
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,7 +85,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3080853664756428722}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 362d09c33c119435485fc58113ed3d35, type: 3}
+  m_Script: {fileID: 11500000, guid: 2bd4432079d79495a972728a9d7f245a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   originalLocation: {x: 0, y: 0}
