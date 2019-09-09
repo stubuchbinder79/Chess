@@ -1,7 +1,5 @@
 # Chess
-A chess game prototype created with Unity
-
-<b>Unity 2019.2.2</b>
+A 2D chess prototype developed in <b>Unity 2019.2.2</b> to showcase approach to game development
 
 #  Notes
 <ul>
