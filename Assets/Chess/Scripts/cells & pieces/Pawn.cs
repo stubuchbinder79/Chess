@@ -10,25 +10,25 @@ public class Pawn : Piece
 		int forwardDirection = GameManager.Instance.currentPlayer.forward;
 		Vector2Int forward = new Vector2Int(gridPoint.x, gridPoint.y + forwardDirection);
 
-		if (GameManager.Instance.PieceAtGrid(forward) == false)
+		if (GameManager.Instance.PieceAtGridPoint(forward) == false)
 			locations.Add(forward);
 
 		if (!HasMoved)
 		{
 			Vector2Int forward2 = new Vector2Int(gridPoint.x, gridPoint.y + forwardDirection * 2);
-			if (GameManager.Instance.PieceAtGrid(forward2) == false)
+			if (GameManager.Instance.PieceAtGridPoint(forward2) == false)
 				locations.Add(forward2);
 		}
 
 
 		Vector2Int forwardRight = new Vector2Int(gridPoint.x + 1, gridPoint.y + forwardDirection);
 
-		if (GameManager.Instance.PieceAtGrid(forwardRight))
+		if (GameManager.Instance.PieceAtGridPoint(forwardRight))
 			locations.Add(forwardRight);
 
 		Vector2Int forwardLeft = new Vector2Int(gridPoint.x - 1, gridPoint.y + forwardDirection);
 
-		if (GameManager.Instance.PieceAtGrid(forwardLeft))
+		if (GameManager.Instance.PieceAtGridPoint(forwardLeft))
 			locations.Add(forwardLeft);
 
 		return locations;

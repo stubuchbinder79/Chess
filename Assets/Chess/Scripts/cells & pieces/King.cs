@@ -37,13 +37,13 @@ public class King : Piece
         // add locations for castling
         if (GameManager.Instance.CastleIsActive(gameObject))
         {
-            if (!GameManager.Instance.PieceAtGrid(new Vector2Int(gridPoint.x + 1, gridPoint.y)))
+            if (!GameManager.Instance.PieceAtGridPoint(new Vector2Int(gridPoint.x + 1, gridPoint.y)))
             {
                 Vector2Int castleRight = new Vector2Int(gridPoint.x + 2, gridPoint.y);
                 locations.Add(castleRight);
             }
 
-            if (!GameManager.Instance.PieceAtGrid(new Vector2Int(gridPoint.x - 1, gridPoint.y)))
+            if (!GameManager.Instance.PieceAtGridPoint(new Vector2Int(gridPoint.x - 1, gridPoint.y)))
             {
                 Vector2Int castleLeft = new Vector2Int(gridPoint.x - 2, gridPoint.y);
                 locations.Add(castleLeft);

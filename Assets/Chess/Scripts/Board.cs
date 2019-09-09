@@ -93,4 +93,14 @@ public class Board : MonoBehaviour
 		return go;
 	}
 
+	public void SelectPiece(GameObject selectedPiece)
+	{
+		foreach (Cell cell in allCells)
+		{
+			cell.highlighted = false;
+		}
+
+		Vector2Int gridPoint = GameManager.Instance.GridForPiece(selectedPiece);
+		allCells[gridPoint.x, gridPoint.y].highlighted = true;
+	}
 }
