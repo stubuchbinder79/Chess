@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$USER_HOME$/Library/Caches/Rider2019.2/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2019.2/resharper-host/local/Transient/ReSharperHost/v192/SolutionCaches/_Chess.-1593508272.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Chess" t="Include">
+          <e p="Scripts" t="Include">
+            <e p="Bishop.cs" t="Include" />
+            <e p="Board.cs" t="Include" />
+            <e p="Cell.cs" t="Include" />
+            <e p="CellSelector.cs" t="Include" />
+            <e p="ExtensionMethods.cs" t="Include" />
+            <e p="GameManager.cs" t="Include" />
+            <e p="King.cs" t="Include" />
+            <e p="Knight.cs" t="Include" />
+            <e p="MoveSelector.cs" t="Include" />
+            <e p="Pawn.cs" t="Include" />
+            <e p="Piece.cs" t="Include" />
+            <e p="Player.cs" t="Include" />
+            <e p="Queen.cs" t="Include" />
+            <e p="Rook.cs" t="Include" />
+            <e p="Singleton.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="Chess.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Temp/bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
